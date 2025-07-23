@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "compile",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: compile",
+			"detail": "tsc -p ./"
+		},
+		{
+			"label": "CreateDocArray",
+			"type": "shell",
+			"group": "build",
+			"command": "python3 ./rst2json/rst2JSON.py",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "DebugPreLaunch",
+			"type": "shell",
+			"group": "build",
+			"command": "python3 ./rst2json/rst2JSON.py; npm run compile",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "UpdateRST",
+			"type": "shell",
+			"group": "build",
+			"command": "rm -rf rst; mkdir rst; cd rst; git clone --depth=1 --single-branch --branch=release https://github.com/lammps/lammps.git; cp -r lammps/doc/src/* .; rm -rf lammps/; cd ..; python3 ./rst2json/rst2JSON.py; bash ./scripts/resize256.sh",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"problemMatcher": []
+		}
+	]
+}

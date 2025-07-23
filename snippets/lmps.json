@@ -1,0 +1,11 @@
+{
+    "if/then/else": {
+        "prefix": "if/else",
+        "body": [
+            "if ${1:\"condition\"} then &",
+            "\t${2:\"command\"} &",
+            "else &",
+            "\t${3:\"command\"}"
+        ]
+    }
+}

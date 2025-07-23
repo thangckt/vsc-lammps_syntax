@@ -1,0 +1,100 @@
+# This is a syncronisation workflow to that pulls the latest documentation from the lammps repository
+# and builds an updated vsix-package based on these files.
+
+name: SYNC
+
+on:
+  schedule:
+    - cron: '45 11 1 * *'
+
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - name: Cache node modules
+      uses: actions/cache@v4
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+          
+    - name: Download updated Docs
+      id: s1
+      run: |
+        rm -rf rst
+        mkdir rst
+        cd rst
+        git clone --depth=1 --single-branch --branch=release https://github.com/lammps/lammps.git
+        cp -r lammps/doc/src/* .
+        rm -rf lammps/
+        cd ..
+
+    - name: Build Docs TS-Object
+      id: s2
+      if: steps.s1.conclusion == 'success'
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install numpy
+        python3 ./rst2json/rst2JSON.py
+    
+    - name: Check for updated docs
+      id: s3
+      if: steps.s2.conclusion == 'success'
+      run: |
+        git config --global user.name 'thfriedrich'
+        git config --global user.email 'thfriedrich@users.noreply.github.com'
+        git config --global pull.rebase true
+        git add .
+        # Check if Lammps Docs were updated
+        if ! [[ $(git status) == *"nothing to commit, working tree clean"* ]]; then
+          echo "b_update=true"  >> $GITHUB_ENV
+        else
+          # Check if vscode-Lammps master branch had commits since last tag
+          n_com=$(git rev-list $(git describe --tags --abbrev=0 @^)..master --count)
+          if [ "$n_com" -gt "0" ];then
+            echo "b_update=true"  >> $GITHUB_ENV
+          fi
+        fi
+
+    - name: Setup node
+      id: s4
+      if: steps.s3.conclusion == 'success' && env.b_update == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Build package
+      id: s5
+      if: steps.s4.conclusion == 'success' && env.b_update == 'true'
+      run: |
+        sudo apt install imagemagick -y
+        bash ./scripts/resize256.sh
+        npm install
+        npm install @vscode/vsce
+        git add .
+        git commit -m "Scheduled sync of lammps_vscode with Lammps documentation $(date +'%Y-%m-%d')"
+        git pull --rebase
+        npm version patch
+        git push
+        npx @vscode/vsce package
+
+    - name: Publish2Marketplace
+      id: s6
+      if: steps.s5.conclusion == 'success' && env.b_update == 'true'
+      run: npx @vscode/vsce publish
+      env:
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+  
+        
+        
