@@ -1,12 +1,12 @@
 {
-  "name": "lammps-syntax",
-  "displayName": "Lammps Syntax Highlighting",
+  "name": "lammps-script-syntax",
+  "displayName": "Lammps Script Syntax",
   "keywords": [
     "Lammps",
     "Molecular Dynamics"
   ],
   "icon": "imgs/logo2.png",
-  "description": "Keyword/Syntax highlighting extension for Molecular Dynamics Software LAMMPS",
+  "description": "Keyword/Syntax highlighting extension for Molecular Dynamics Scripts LAMMPS",
   "version": "1.0.0",
   "license": "GPL-2.0-or-later",
   "publisher": "thangckt",
@@ -40,11 +40,7 @@
           ".lmps",
           ".lammps"
         ],
-        "configuration": "./language-configuration.json",
-        "icon": {
-          "light": "imgs/logo2.png",
-          "dark": "imgs/logo2.png"
-        }
+        "configuration": "./language-configuration.json"
       }
     ],
     "snippets": [
@@ -96,11 +92,6 @@
           "default": "true",
           "description": "Display command examples in the hover popup."
         },
-        "lammps.Hover.Restrictions": {
-          "type": "boolean",
-          "default": "false",
-          "description": "Display command restrictions in the hover popup."
-        },
         "lammps.AutoComplete.Setting": {
           "type": "string",
           "default": "Medium",
@@ -123,26 +114,13 @@
   },
   "scripts": {
     "compile": "cpx \"src/**/*.js\" dist && tsc -p ./",
-    "lint": "eslint src --ext ts",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "vscode:prepublish": "rm dist/* ; webpack --mode production",
-    "webpack": "webpack --mode development",
-    "webpack-dev": "webpack --mode development --watch",
-    "test-compile": "tsc -p ./"
+    "vscode:prepublish": "rm dist/* ; webpack --mode production"
   },
   "devDependencies": {
     "@larscom/cpx": "^2.1.0",
-    "@types/mocha": "^10.0.7",
     "@types/node": "^22.5.2",
     "@types/vscode": "^1.92.0",
-    "@typescript-eslint/eslint-plugin": "^8.3.0",
-    "@typescript-eslint/parser": "^8.3.0",
     "@vscode/vsce": "^3.6.0",
-    "copy-webpack-plugin": "^12.0.2",
-    "eslint": "^9.9.1",
-    "glob": "^11.0.0",
-    "mocha": "^10.7.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.4",
     "webpack": "^5.94.0",
