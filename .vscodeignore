@@ -1,46 +1,74 @@
 .github
 .gitignore
+.git
+.vscode
 *.xcf
 *.svg
 *.lmp
 *.lmps
 *.vsix
 *.py
-.vscode
-rst2json
-out
-src
-scripts
+*.map
+*.d.ts
 
+# Source files
+src/
+dist/extension.js.map
 tsconfig.json
 webpack.config.js
+package-lock.json
 
-# Reduce size of mathjax
-!node_modules/mathjax-node/LICENSE
+# Build tools
+rst2json/
+scripts/
+out/
+
+# Documentation (keep README for users)
+RELEASE.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+
+# Unused images (we only use logo2.png)
+imgs/autocomplete.gif
+imgs/dashboard.gif
+imgs/doc_panel.gif
+imgs/hover.gif
+imgs/lammps-lng-anim.gif
+imgs/lint.gif
+imgs/vsc_lammps.png
+
+# Unused themes
+css/
+
+# Exclude most node_modules - only keep essential runtime files
+node_modules/**
+!node_modules/markdown-it
+!node_modules/markdown-it/package.json
+!node_modules/markdown-it/index.js
+!node_modules/markdown-it/lib/**
+
+!node_modules/mathjax-node
 !node_modules/mathjax-node/package.json
 !node_modules/mathjax-node/lib/**
-node_modules/mathjax-node/**
 
-!node_modules/mathjax/latest.js
-!node_modules/mathjax/MathJax.js
-!node_modules/mathjax/package.json
-!node_modules/mathjax/unpacked/MathJax.js
-!node_modules/mathjax/unpacked/extensions/MathZoom.js
-!node_modules/mathjax/unpacked/extensions/toMathML.js
-!node_modules/mathjax/unpacked/extensions/tex2jax.js
-!node_modules/mathjax/unpacked/extensions/TeX/AMSmath.js
-!node_modules/mathjax/unpacked/extensions/TeX/AMSsymbols.js
-!node_modules/mathjax/unpacked/extensions/TeX/autoload-all.js
-!node_modules/mathjax/unpacked/extensions/TeX/color.js
-!node_modules/mathjax/unpacked/extensions/TeX/noUndefined.js
-!node_modules/mathjax/unpacked/jax/element/**
-!node_modules/mathjax/unpacked/jax/input/**
-!node_modules/mathjax/unpacked/jax/output/SVG/**
-!node_modules/mathjax/unpacked/jax/output/CommonHTML/**
-node_modules/mathjax/**
+!node_modules/vscode-oniguruma
+!node_modules/vscode-oniguruma/package.json
+!node_modules/vscode-oniguruma/release/*.wasm
+!node_modules/vscode-oniguruma/release/onig.js
 
-!rst/JPG
-!rst/img/*
-rst/img/wsl_tutorial
-rst
+!node_modules/vscode-textmate
+!node_modules/vscode-textmate/package.json
+!node_modules/vscode-textmate/release
+!node_modules/vscode-textmate/release/main.js
+
+# Exclude common unnecessary dirs in node_modules
+node_modules/**/.github
+node_modules/**/test
+node_modules/**/tests
+node_modules/**/.git
+node_modules/**/.gitignore
+node_modules/**/*.md
+
+# Exclude rst documentation
+rst/
 
