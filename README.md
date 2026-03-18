@@ -1,4 +1,4 @@
-# Lammps Syntax in VSCode README
+# Lammps Syntax in VSCode 
 
 This extension is originally based on [lammps_vscode](https://github.com/ThFriedrich/lammps_vscode)
 
