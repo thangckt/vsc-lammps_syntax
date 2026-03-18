@@ -114,13 +114,14 @@
   },
   "scripts": {
     "compile": "cpx \"src/**/*.js\" dist && tsc -p ./",
-    "vscode:prepublish": "rm dist/* ; webpack --mode production"
+    "vscode:prepublish": "rm -rf dist && mkdir -p dist && webpack --mode production"
   },
   "devDependencies": {
     "@larscom/cpx": "^2.1.0",
     "@types/node": "^22.5.2",
     "@types/vscode": "^1.92.0",
     "@vscode/vsce": "^3.6.0",
+    "copy-webpack-plugin": "^14.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.4",
     "webpack": "^5.94.0",
