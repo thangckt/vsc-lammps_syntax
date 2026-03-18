@@ -2,7 +2,7 @@
 
 This extension is originally based on [lammps_vscode](https://github.com/ThFriedrich/lammps_vscode)
 
-This extension is a VSCode extension, concisely for highlighting LAMMPS input files.
+A minimal VSCode extension, concisely for highlighting LAMMPS input files.
 
 ## Syntax/Keyword Highlighting
 ![Syntax Highlighting](imgs/lammps-lng-anim.gif)
