@@ -1,12 +1,17 @@
-# LAMMPS Syntax in VSCode 
+# LAMMPS Syntax in VSCode
 
 This extension is originally based on [lammps_vscode](https://github.com/ThFriedrich/lammps_vscode)
 
-A minimal VSCode extension, concisely for highlighting LAMMPS input files.
+A minimal VSCode extension concisely for highlighting LAMMPS input files.
 
-## Syntax/Keyword Highlighting
+## Features
+- Highlight the keywords in LAMMPS input files.
+- Folding possible between Markers #[ and #]
+- Recognizes `.lmp`, `.lmps` and `.lammps` file extensions and files beginning with "in."
+
 ![Syntax Highlighting](imgs/lammps-lng-anim.gif)
 
-- Syntax Highlighting for Keywords, Variables and Data Types
-- Folding possible between Markers #[ and #]
-- Recognizes .lmp, .lmps and .lammps file extensions and files beginning with "in."
+## Release Notes
+
+### 1.0.1
+- Minor bug fixes
