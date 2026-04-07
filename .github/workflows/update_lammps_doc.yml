@@ -8,7 +8,7 @@ on:
     - cron: '45 11 1 * *'
 
   workflow_dispatch:
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-          
+
     - name: Download updated Docs
       id: s1
       run: |
@@ -47,13 +47,13 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install numpy
         python3 ./rst2json/rst2JSON.py
-    
+
     - name: Check for updated docs
       id: s3
       if: steps.s2.conclusion == 'success'
       run: |
-        git config --global user.name 'thfriedrich'
-        git config --global user.email 'thfriedrich@users.noreply.github.com'
+        git config --global user.name 'thangckt'
+        git config --global user.email 'thangckt@users.noreply.github.com'
         git config --global pull.rebase true
         git add .
         # Check if Lammps Docs were updated
@@ -95,6 +95,3 @@ jobs:
       run: npx @vscode/vsce publish
       env:
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
-  
-        
-        

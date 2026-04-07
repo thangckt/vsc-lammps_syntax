@@ -1,14 +1,14 @@
 import json
-import numpy as np
 import os
 import re
-import rst2md
+
+import numpy as np
 import rst2JSON_groups
-from copy import copy
+import rst2md
 
 
 class CMD:
-    """Class representing the contents of a documentation page for LAMMPS Commands"""
+    """Class representing the contents of a documentation page for LAMMPS Commands."""
 
     # Constructor
 
@@ -55,14 +55,12 @@ class CMD:
             self.__get_short_description__()
             self.restrictions = self.__section2md__(self.__sections__["Restrictions"])
             if len(self.__section2md__(self.__sections__["Related commands"])) > 0:
-                self.related = self.__section2md__(
-                    self.__sections__["Related commands"]
-                )
+                self.related = self.__section2md__(self.__sections__["Related commands"])
             else:
                 self.related = "none"
 
     def __read_file2sections__(self):
-        with open(self.__rst_path__, "r") as f:
+        with open(self.__rst_path__) as f:
             self.__rst_txt__ = f.read()
             splits = []
             section_iter = re.finditer(
@@ -76,36 +74,22 @@ class CMD:
                 elif tag == "Exampl":
                     splits.append({"tag": "Examples", "p1": m.start(), "p2": m.end()})
                 elif tag == "Descri":
-                    splits.append(
-                        {"tag": "Description", "p1": m.start(), "p2": m.end()}
-                    )
+                    splits.append({"tag": "Description", "p1": m.start(), "p2": m.end()})
                 elif tag == "Restri":
-                    splits.append(
-                        {"tag": "Restrictions", "p1": m.start(), "p2": m.end()}
-                    )
+                    splits.append({"tag": "Restrictions", "p1": m.start(), "p2": m.end()})
                 elif tag == "Relate":
-                    splits.append(
-                        {"tag": "Related commands", "p1": m.start(), "p2": m.end()}
-                    )
+                    splits.append({"tag": "Related commands", "p1": m.start(), "p2": m.end()})
                 elif tag == "Defaul":
                     splits.append({"tag": "Default", "p1": m.start(), "p2": m.end()})
 
             n_splits = len(splits)
             if n_splits > 0:
                 splits = sorted(splits, key=lambda x: x["p1"])
-                self.__sections__.update(
-                    {"Indices": self.__rst_txt__[0 : splits[0]["p1"]]}
-                )
+                self.__sections__.update({"Indices": self.__rst_txt__[0 : splits[0]["p1"]]})
                 for xs in range(n_splits):
                     x1 = splits[xs]["p2"]
-                    x2 = (
-                        len(self.__rst_txt__)
-                        if xs == n_splits - 1
-                        else splits[xs + 1]["p1"]
-                    )
-                    text = (
-                        self.__sections__[splits[xs]["tag"]] + self.__rst_txt__[x1:x2]
-                    )
+                    x2 = len(self.__rst_txt__) if xs == n_splits - 1 else splits[xs + 1]["p1"]
+                    text = self.__sections__[splits[xs]["tag"]] + self.__rst_txt__[x1:x2]
                     self.__sections__.update({splits[xs]["tag"]: text})
 
     def __validate__(self) -> bool:
@@ -196,15 +180,13 @@ class CMD:
         self.parameters = rst2md.tr_inline_doc(prms_block)
 
     def __blocks2md_section__(self, blocks: str) -> str:
-        out = str()
+        out = ""
         for ib in range(0, len(blocks)):
             out += rst2md.tr_blocks(blocks[ib]) + "\n"
         return out
 
     def __section2blocks__(self, txt: str) -> str:
-        blocks = re.split(
-            r"(?:^|\n*)(\.\..*?\:\:[\s\S\r]*?)(?=(?:\n{2,}\s{0,1}\S|\Z))", txt
-        )
+        blocks = re.split(r"(?:^|\n*)(\.\..*?\:\:[\s\S\r]*?)(?=(?:\n{2,}\s{0,1}\S|\Z))", txt)
         for ib, b in enumerate(blocks):
             if b == "":
                 blocks.remove(b)
@@ -262,7 +244,7 @@ class CMD:
                arguments choices if there are any. Argument types are:
                     1: argument is part of the command
                     2: argument is a variable
-                    3: argument has choices
+                    3: argument has choices.
 
             Args:
                 arg (str): Argument of the Command
@@ -284,7 +266,7 @@ class CMD:
                         re.search(  # The description contains choices?
                             r".*\s(or)\s", dscp_fil
                         )
-                        != None
+                        is not None
                     )
                     if b_choices:
                         choices = dscp_fil.split(" or ")
@@ -318,7 +300,7 @@ class CMD:
             arg_ar = []
             for a in args:
                 choices = []
-                a_clean = re.sub(r"[\[\]\*\<\>]", "", a, 8)
+                re.sub(r"[\[\]\*\<\>]", "", a, 8)
                 # Append Command-Keyword as plain string
                 if com_words.__contains__(a):
                     choices, b_acc = app_choices(a, choices)
