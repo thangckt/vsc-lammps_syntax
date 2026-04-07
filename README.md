@@ -9,9 +9,4 @@ A minimal VSCode extension concisely for highlighting LAMMPS input files.
 - Folding possible between Markers #[ and #]
 - Recognizes `.lmp`, `.lmps` and `.lammps` file extensions and files beginning with "in."
 
-![Syntax Highlighting](imgs/lammps-lng-anim.gif)
-
-## Release Notes
-
-### 1.0.1
-- Minor bug fixes
+![Syntax Highlighting](image/example.gif)
