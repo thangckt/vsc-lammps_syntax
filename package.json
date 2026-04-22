@@ -12,7 +12,7 @@
     "publisher": "thangckt",
     "repository": {
         "type": "git",
-        "url": "https://github.com/thangckt/vsc-lammps_syntax.git"
+        "url": "https://github.com/thangckt/vsc_lammps_syntax.git"
     },
     "engines": {
         "vscode": "^1.92.0"
