@@ -7,7 +7,7 @@
     ],
     "icon": "image/logo_lammp_ext.png",
     "description": "Keyword/Syntax highlighting extension for Molecular Dynamics Scripts LAMMPS",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "GPL-2.0-or-later",
     "publisher": "thangckt",
     "repository": {
