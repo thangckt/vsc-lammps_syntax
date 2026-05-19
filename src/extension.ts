@@ -1,8 +1,11 @@
-import { doc_entry, getCompletionList, getDocumentation, doc_completion_item } from "./doc_fcns";
+import { doc_entry, getCompletionList, getDocumentation, doc_completion_item, initCommandDocMap } from "./doc_fcns";
 import { createHover, getRangeFromPosition } from './hover_fcns';
 import * as vscode from 'vscode';
 
 export async function activate(context: vscode.ExtensionContext) {
+
+	// Initialize doc command map for fast lookups
+	initCommandDocMap()
 
 	// Register Hover Provider
 	context.subscriptions.push(

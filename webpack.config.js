@@ -20,7 +20,7 @@ const config = {
     devtool: 'source-map',
     externals: {
         'vscode': 'commonjs2 vscode',
-        'mathjax-node': 'commonjs2 mathjax-node',
+        'mathjax-full': 'commonjs2 mathjax-full',
         'markdown-it': 'commonjs2 markdown-it',
         'vscode-oniguruma': 'commonjs2 vscode-oniguruma',
         'vscode-textmate': 'commonjs2 vscode-textmate'

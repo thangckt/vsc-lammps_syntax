@@ -7,7 +7,7 @@
     ],
     "icon": "image/logo_lammp_ext.png",
     "description": "Keyword/Syntax highlighting extension for Molecular Dynamics Scripts LAMMPS",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "license": "GPL-2.0-or-later",
     "publisher": "thangckt",
     "repository": {
@@ -129,7 +129,7 @@
     },
     "dependencies": {
         "markdown-it": "^14.1.0",
-        "mathjax-node": "^1.3.0",
+        "mathjax-full": "^3.2.2",
         "vscode-oniguruma": "^2.0.1",
         "vscode-textmate": "^9.1.0"
     }
