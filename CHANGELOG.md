@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.5
+- Update README
+
+## 1.0.4
+- Update logo
 
 ## 1.0.3
 - Minor fixes
