@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.7
+- Update examples
+
 ## 1.0.6
 - Fix hoover
 
