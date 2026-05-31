@@ -5,7 +5,7 @@ A minimal VSCode extension concisely for highlighting LAMMPS input files.
 This extension is originally derived from [lammps_vscode](https://github.com/ThFriedrich/lammps_vscode), which strips off uncommon features to
 minimizes memory usage and dependencies.
 
-I made it to fit my personal usage and resources. If you need more features, I recommend to use the original one.
+I made it to fit my personal usage and resources. For more features, I recommend to use the original one.
 
 
 ## Features
